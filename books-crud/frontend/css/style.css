@@ -1,0 +1,10 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    background-color: #d9f0ff!important;
+}
+img{
+    width: 150px;
+    border-radius: 10px;
+}
