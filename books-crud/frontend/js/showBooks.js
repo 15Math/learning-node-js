@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetchBooks();
+    displayBooks();
 });
 
 const fetchBooks = async()=> {
@@ -9,16 +9,17 @@ const fetchBooks = async()=> {
 
         const books = result.books; 
 
-        displayBooks(books);
+        return books;
     } catch (error) {
         console.error('Erro ao buscar livros:', error);
     }
 }
 
-const displayBooks = (books)=>{
+const displayBooks = async()=>{
+    const books = await fetchBooks();
     const main = document.querySelector('main');
     console.log(books);
-    books.forEach(book => {
+    books.slice().reverse().forEach(book => {
         const bookCard = document.createElement('div');
         bookCard.classList.add('bookCard', 'bg-light', 'd-flex', 'mx-auto', 'w-50', 'p-3', 'border', 'rounded', 'mb-3');
 
@@ -32,16 +33,19 @@ const displayBooks = (books)=>{
                     <p><strong>Páginas:</strong> ${book.number_pages}</p>
                 </div>
                 <div class="d-flex mt-4">
-                    <button class="btn btn-outline-primary p-1 mr-3 d-flex align-items-center justify-content-center">
+                    <button class=" btn btn-outline-primary p-1 mr-3 d-flex align-items-center justify-content-center" data-id="${book.id}">
                         <span class="material-symbols-outlined">edit</span>
                     </button>
-                    <button class="btn btn-outline-primary p-1 d-flex align-items-center justify-content-center">
+                    <button class="btn btn-outline-primary p-1 d-flex align-items-center justify-content-center" data-id="${book.id}">
                         <span class="material-symbols-outlined">delete</span>
                     </button>
                 </div>
             </div>
         `;
 
+
         main.appendChild(bookCard);
     });
 }
+
+
