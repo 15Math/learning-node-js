@@ -5,9 +5,9 @@ const getAll = async()=>{
     return books;
 }
 const createBook = async(book)=>{
-    const {title, autor_name, created_at, number_pages} = book;
-    const query = 'INSERT INTO book(title, autor_name, created_at, number_pages) VALUES (?,?,?,?)'
-    const [newBook] = await conn.execute(query, [title, autor_name, created_at, number_pages])
+    const {title, autor_name, created_at, number_pages,cover} = book;
+    const query = 'INSERT INTO book(title, autor_name, created_at, number_pages, cover) VALUES (?,?,?,?,?)'
+    const [newBook] = await conn.execute(query, [title, autor_name, created_at, number_pages,cover])
     return {insertId: newBook.insertId};
 }
 
@@ -18,9 +18,9 @@ const deleteBook = async(id)=>{
 }
 
 const updateBook = async(id, newData)=>{
-    const {title, autor_name, created_at, number_pages} = newData;
-    const query = 'UPDATE book SET title = ?, autor_name = ?, created_at = ?, number_pages = ? WHERE id = ? '
-    const [updatedBook] = await conn.execute(query,[title, autor_name, created_at, number_pages, id ])
+    const {title, autor_name, created_at, number_pages,cover} = newData;
+    const query = 'UPDATE book SET title = ?, autor_name = ?, created_at = ?, number_pages = ?, cover = ? WHERE id = ? '
+    const [updatedBook] = await conn.execute(query,[title, autor_name, created_at, number_pages,cover, id])
     return updatedBook;
 }
 
